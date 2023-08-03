@@ -55,7 +55,7 @@ npm start
 
 ## Author
 
-- [**Truly Mittal**](https://trulymittal.com)
+- Santosh Kumar Singh
 
 ## Contribute
 
