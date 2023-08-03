@@ -1,4 +1,4 @@
-# Role Based Access Control (...still in dev mode...)
+# Role Based Access Control (...still in dev mode for educational institutions...)
 
 This is a Role Based Access Control application using Nodejs, Express, Passport Js, etc.
 You can use this application as the starting point for whatever project you are going to build which needs authentication and authorization.
@@ -20,7 +20,7 @@ The application is _almost_ **production ready**.
 Step 1: Clone the repo
 
 ```bash
-git clone https://github.com/trulymittal/role-based-access-control
+git clone https://github.com/Santoshs0293/Education.git
 ```
 
 Step 2: cd into the cloned repo and run:
