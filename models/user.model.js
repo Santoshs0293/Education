@@ -5,6 +5,10 @@ const { roles } = require('../utils/constants');
 const permissions = require('../utils/permissions'); // Assuming you have a permissions file with data
 
 const UserSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     required: true,
@@ -35,7 +39,7 @@ UserSchema.pre('save', async function (next) {
       this.password = hashedPassword;
       if (this.email === process.env.ADMIN_EMAIL.toLowerCase()) {
         this.role = roles.admin;
-        this.permissions = permissions.admin; 
+        this.permissions = permissions.admin;
         // You can also set default permissions for the admin here if needed.
       }
     }
@@ -53,5 +57,5 @@ UserSchema.methods.isValidPassword = async function (password) {
   }
 };
 
-const User = mongoose.model('user', UserSchema);
+const User = mongoose.model('User', UserSchema); // 'User' should be capitalized
 module.exports = User;

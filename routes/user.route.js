@@ -1,9 +1,15 @@
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
+const { ensureAuthenticated, ensureNotAuthenticated } = require('../utils/authMiddleware');
 
-router.get('/profile', async (req, res, next) => {
-  // console.log(req.user);
-  const person = req.user;
-  res.render('profile', { person });
+// Protected route for authenticated users
+router.get('/profile', ensureAuthenticated, (req, res, next) => {
+  // Render the profile page
+});
+
+// Route accessible only for not authenticated users
+router.get('/login', ensureNotAuthenticated, (req, res, next) => {
+  // Render the login page
 });
 
 module.exports = router;

@@ -2,6 +2,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user.model');
 
+// Configure the local strategy for passport
 passport.use(
   new LocalStrategy(
     {
@@ -11,30 +12,37 @@ passport.use(
     async (email, password, done) => {
       try {
         const user = await User.findOne({ email });
-        // Username/email does NOT exist
+
         if (!user) {
           return done(null, false, {
             message: 'Username/email not registered',
           });
         }
-        // Email exists, now we need to verify the password
+
         const isMatch = await user.isValidPassword(password);
-        return isMatch
-          ? done(null, user)
-          : done(null, false, { message: 'Incorrect password' });
+
+        if (isMatch) {
+          return done(null, user);
+        } else {
+          return done(null, false, { message: 'Incorrect password' });
+        }
       } catch (error) {
-        done(error);
+        return done(error);
       }
     }
   )
 );
 
+// Serialize user into session
 passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 
+// Deserialize user from session
 passport.deserializeUser(function (id, done) {
   User.findById(id, function (err, user) {
     done(err, user);
   });
 });
+
+module.exports = passport;

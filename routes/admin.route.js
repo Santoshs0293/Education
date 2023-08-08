@@ -6,10 +6,10 @@ const { roles } = require('../utils/constants');
 // CREATE - Add a new user
 router.post('/create-user', async (req, res, next) => {
   try {
-    const { email, password, role } = req.body;
-    // Check if email and password are provided
-    if (!email || !password) {
-      req.flash('error', 'Email and password are required');
+    const { name, email, password, role } = req.body;
+    // Check if name, email, and password are provided
+    if (!name || !email || !password) {
+      req.flash('error', 'Name, email, and password are required');
       return res.redirect('back');
     }
 
@@ -28,7 +28,7 @@ router.post('/create-user', async (req, res, next) => {
     }
 
     // Create a new user
-    const user = new User({ email, password, role });
+    const user = new User({ name, email, password, role });
     await user.save();
 
     req.flash('success', 'User created successfully');
@@ -83,7 +83,7 @@ router.post('/update-role/:id', async (req, res, next) => {
       { new: true, runValidators: true }
     );
 
-    req.flash('info', `Updated role for ${user.email} to ${user.role}`);
+    req.flash('info', `Updated role for ${user.name} (${user.email}) to ${user.role}`);
     res.redirect('back');
   } catch (error) {
     next(error);

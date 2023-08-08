@@ -9,7 +9,7 @@ router.get(
   '/login',
   ensureLoggedOut({ redirectTo: '/' }),
   async (req, res, next) => {
-    res.render('login');
+    res.render('login', { user: req.user });
   }
 );
 
@@ -17,7 +17,6 @@ router.post(
   '/login',
   ensureLoggedOut({ redirectTo: '/' }),
   passport.authenticate('local', {
-    // successRedirect: '/',
     successReturnToOrRedirect: '/',
     failureRedirect: '/auth/login',
     failureFlash: true,
@@ -28,7 +27,7 @@ router.get(
   '/register',
   ensureLoggedOut({ redirectTo: '/' }),
   async (req, res, next) => {
-    res.render('register');
+    res.render('register', { user: req.user });
   }
 );
 
@@ -46,6 +45,7 @@ router.post(
         res.render('register', {
           email: req.body.email,
           messages: req.flash(),
+          user: req.user,
         });
         return;
       }
@@ -61,7 +61,7 @@ router.post(
       await user.save();
       req.flash(
         'success',
-        `${user.email} registered succesfully, you can now login`
+        `${user.email} registered successfully, you can now login`
       );
       res.redirect('/auth/login');
     } catch (error) {
@@ -69,7 +69,6 @@ router.post(
     }
   }
 );
-
 
 router.get(
   '/logout',
@@ -85,19 +84,3 @@ router.get(
 );
 
 module.exports = router;
-
-// function ensureAuthenticated(req, res, next) {
-//   if (req.isAuthenticated()) {
-//     next();
-//   } else {
-//     res.redirect('/auth/login');
-//   }
-// }
-
-// function ensureNOTAuthenticated(req, res, next) {
-//   if (req.isAuthenticated()) {
-//     res.redirect('back');
-//   } else {
-//     next();
-//   }
-// }

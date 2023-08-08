@@ -19,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const MongoStore = connectMongo(session);
+
 // Init Session
 app.use(
   session({
@@ -99,19 +100,11 @@ mongoose
   })
   .catch((err) => console.log(err.message));
 
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    next();
-  } else {
-    res.redirect('/auth/login');
-  }
-}
-
 function ensureAdmin(req, res, next) {
-  if (req.user.role === roles.admin) {
+  if (req.user && req.user.role === roles.admin) {
     next();
   } else {
-    req.flash('warning', 'you are not Authorized to see this route');
+    req.flash('warning', 'You are not authorized to see this route');
     res.redirect('/');
   }
 }

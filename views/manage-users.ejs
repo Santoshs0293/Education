@@ -26,6 +26,7 @@
       <thead>
         <tr>
           <th>id</th>
+          <th>Name</th>
           <th>email</th>
           <th>role</th>
           <th>Actions</th>
@@ -35,6 +36,7 @@
         <% users.forEach(user => { %>
         <tr>
           <td><%= user.id %></td>
+          <td><%= user.name %></td>
           <td><a href="/admin/user/<%= user.id %>"><%= user.email %></a></td>
           <td>
             <form
@@ -62,31 +64,34 @@
     </table>
   </section>
 
-<!-- Create User Section -->
-<section class="container create-user-container">
-  <h1 class="table">Create User</h1>
+  <!-- Create User Section -->
+  <section class="container create-user-container">
+    <h1 class="table">Create User</h1>
 
-  <form action="/admin/create-user" method="post" class="create-user-form">
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" name="email" id="email" class="form-control" required>
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" class="form-control" required>
-    </div>
-    <div class="form-group">
-      <label for="role">Role</label>
-      <select name="role" id="role" class="form-control" required>
-        <option value="ADMIN">Admin</option>
-        <option value="MODERATOR">Moderator</option>
-        <option value="CLIENT">Client</option>
-      </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Create User</button>
-  </form>
-</section>
-
+    <form action="/admin/create-user" method="post" class="create-user-form">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="role">Role</label>
+        <select name="role" id="role" class="form-control" required>
+          <option value="ADMIN">Admin</option>
+          <option value="MODERATOR">Moderator</option>
+          <option value="CLIENT">Client</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Create User</button>
+    </form>
+  </section>
 
   <!-- Footer -->
   <footer>
