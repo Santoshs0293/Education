@@ -1,7 +1,7 @@
 {
   "name": "rbac_tutorial",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a Role Based Access Control application using Nodejs, Express, Passport Js, etc. You can use this application as the starting point for whatever project you are going to build which needs authentication and authorization.",
   "main": "index.js",
   "scripts": {
     "start": "node app.js",

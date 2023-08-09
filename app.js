@@ -9,6 +9,12 @@ const passport = require('passport');
 const connectMongo = require('connect-mongo');
 const { ensureLoggedIn } = require('connect-ensure-login');
 const { roles } = require('./utils/constants');
+const amqp = require('amqplib');
+const logger = require('winston');
+
+// Import producer and consumer modules
+const { sendToQueue } = require('./producer');
+const { consumeFromQueue } = require('./consumer');
 
 // Initialization
 const app = express();
@@ -68,6 +74,27 @@ app.use(
   ensureAdmin,
   require('./routes/admin.route')
 );
+
+// Routes
+app.get('/send-message', async (req, res) => {
+  try {
+    await sendToQueue('Hello, RabbitMQ!');
+    res.send('Message sent to queue.');
+  } catch (error) {
+    console.error('Error sending message:', error);
+    res.status(500).send('Error sending message.');
+  }
+});
+
+app.get('/consume-message', async (req, res) => {
+  try {
+    await consumeFromQueue();
+    res.send('Message consumed from queue.');
+  } catch (error) {
+    console.error('Error consuming message:', error);
+    res.status(500).send('Error consuming message.');
+  }
+});
 
 // 404 Handler
 app.use((req, res, next) => {
