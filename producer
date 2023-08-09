@@ -1,0 +1,39 @@
+// producer.js
+
+const amqp = require('amqplib');
+
+/**
+ * Sends a message to a specified queue using the AMQP protocol.
+ * @param {string} queue - The name of the queue.
+ * @param {string} message - The message to be sent.
+ */
+async function sendToQueue(queue, message) {
+  try {
+    // Establish a connection to the AMQP server
+    const connection = await amqp.connect(AMQP_CONNECTION_STRING);
+
+    // Create a channel
+    const channel = await connection.createChannel();
+
+    // Assert the existence of the specified queue
+    await channel.assertQueue(queue, { durable: false });
+
+    // Send the message to the queue
+    channel.sendToQueue(queue, Buffer.from(message));
+
+    // Log the sent message to the console
+    console.log(`Sent: ${message}`);
+
+    // Close the connection after a delay of 500 milliseconds
+    setTimeout(() => {
+      connection.close();
+    }, 500);
+  } catch (error) {
+    // Handle any errors that occur during the process
+    console.error('Error sending message:', error);
+  }
+}
+
+module.exports = {
+  sendToQueue,
+};

@@ -1,0 +1,14 @@
+{
+    "python.testing.pytestArgs": [
+        "views"
+    ],
+    "python.testing.unittestEnabled": true,
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./views",
+        "-p",
+        "*test.py"
+    ]
+}

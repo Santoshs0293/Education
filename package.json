@@ -14,13 +14,14 @@
   "dependencies": {
     "amqplib": "^0.10.3",
     "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
     "connect-ensure-login": "^0.1.1",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "express-session": "^1.17.1",
     "express-validator": "^6.8.0",
     "http-errors": "^1.8.0",
@@ -29,7 +30,8 @@
     "morgan": "^1.10.0",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "react-router-dom": "^6.14.2"
+    "react-router-dom": "^6.14.2",
+    "winston": "^3.10.0"
   },
   "devDependencies": {
     "@testing-library/react": "^14.0.0",
