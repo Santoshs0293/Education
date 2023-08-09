@@ -1,4 +1,3 @@
-<!-- views/index.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,11 +5,68 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Role Based Access Control Tutorial</title>
-  <link rel="stylesheet" href="/path/to/your/custom.css">
+  <link rel="stylesheet" href="/public/style.css">
   <!-- Add other CSS files if needed -->
-
   <style>
-    /* Your custom CSS styles here */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      width: 80%;
+      max-width: 1200px;
+      margin: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 20px;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .table {
+      text-align: center;
+    }
+
+    .table th,
+    .table td {
+      padding: 10px;
+    }
+
+    .manage-user-form,
+    .create-user-form {
+      display: flex;
+      align-items: center;
+    }
+
+    .manage-user-form select,
+    .create-user-form select {
+      margin-right: 10px;
+    }
+
+    .btn {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
+    footer {
+      margin-top: 20px;
+      text-align: center;
+      color: #6c757d;
+    }
   </style>
 </head>
 
@@ -21,14 +77,13 @@
   <!-- Manage Users Section -->
   <section class="container manage-users-container">
     <h1 class="table">Manage Users</h1>
-
     <table class="table">
       <thead>
         <tr>
-          <th>id</th>
+          <th>ID</th>
           <th>Name</th>
-          <th>email</th>
-          <th>role</th>
+          <th>Email</th>
+          <th>Role</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -39,23 +94,19 @@
           <td><%= user.name %></td>
           <td><a href="/admin/user/<%= user.id %>"><%= user.email %></a></td>
           <td>
-            <form
-              action="/admin/update-role/<%= user.id %>"
-              method="post"
-              class="manage-user-form"
-            >
+            <form action="/admin/update-role/<%= user.id %>" method="post" class="manage-user-form">
               <input type="hidden" name="id" value="<%= user.id %>" />
               <select name="role" id="role">
-                <option value="ADMIN" <%= user.role === 'ADMIN' ? 'selected' : '' %> >Admin</option>
+                <option value="ADMIN" <%= user.role === 'ADMIN' ? 'selected' : '' %>>Admin</option>
                 <option value="MODERATOR" <%= user.role === 'MODERATOR' ? 'selected' : '' %>>Moderator</option>
                 <option value="CLIENT" <%= user.role === 'CLIENT' ? 'selected' : '' %>>Client</option>
               </select>
-              <input type="submit" value="Update">
+              <input type="submit" value="Update" class="btn">
             </form>
           </td>
           <td>
             <form action="/admin/delete-user/<%= user.id %>" method="post">
-              <input type="submit" value="Delete User">
+              <input type="submit" value="Delete User" class="btn">
             </form>
           </td>
         </tr>
@@ -67,7 +118,6 @@
   <!-- Create User Section -->
   <section class="container create-user-container">
     <h1 class="table">Create User</h1>
-
     <form action="/admin/create-user" method="post" class="create-user-form">
       <div class="form-group">
         <label for="name">Name</label>
