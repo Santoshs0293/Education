@@ -26,7 +26,9 @@ git clone https://github.com/Santoshs0293/Education.git
 Step 2: cd into the cloned repo and run:
 
 ```bash
-npm install
+npm install or npm update 
+```
+npm install express
 ```
 
 Step 3: Put your credentials in the .env file.
